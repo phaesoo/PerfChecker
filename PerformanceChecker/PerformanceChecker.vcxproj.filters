@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{69a8e3a4-1107-49c4-b01d-e56c46fbf27e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerfChecker">
+      <UniqueIdentifier>{624e612c-6f90-4653-bcd4-8f3be7b6d499}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="PerfChecker.cpp">
+      <Filter>PerfChecker</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PerfChecker.h">
+      <Filter>PerfChecker</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
