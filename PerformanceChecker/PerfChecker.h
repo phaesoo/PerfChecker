@@ -16,6 +16,10 @@ public:
     PerfChecker()
         : timeunit_(Second),
         run_flag_(false) { Initialize(); }
+    PerfChecker(TimeUnit timeunit)
+        : timeunit_(timeunit),
+        run_flag_(false) { Initialize(); }
+
     ~PerfChecker() {}
 
     // Commands
@@ -26,14 +30,14 @@ public:
     bool GetTotalPerformTime(double& perform_time);
 
     // Util
-    void SetUnit(const TimeUnit unit);
+    void SetUnit(const TimeUnit unit) { timeunit_ = unit; }
 
 private:
     // Calculate
     double CalcPerformTime(const LONGLONG& start, const LONGLONG& end);
     double GetUnitFactor();
 
-    void Initialize();
+    void Initialize() { check_.clear(); }
     bool CheckValidity();
 
 private:

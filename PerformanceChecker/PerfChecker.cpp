@@ -42,7 +42,7 @@ bool PerfChecker::GetPerformTime(std::vector<double>& perform_time, bool accumul
     double accum_perftime = 0.0;
     for (unsigned int i = 1; i < check_.size(); ++i)
     {
-        double unit_perftime = CalcPerformTime(check_[i - 1], check_[i]);
+        const double unit_perftime = CalcPerformTime(check_[i - 1], check_[i]);
         if (accumulate)
         {
             accum_perftime += unit_perftime;
@@ -59,14 +59,9 @@ bool PerfChecker::GetTotalPerformTime(double& perform_time)
     return true;
 }
 
-void PerfChecker::SetUnit(const TimeUnit unit)
-{
-    timeunit_ = unit;
-}
-
 double PerfChecker::CalcPerformTime(const LONGLONG& start, const LONGLONG& end)
 {
-    if (!QueryPerformanceFrequency(&dummy_)) { assert(0); return false; }
+    if (!QueryPerformanceFrequency(&dummy_)) { assert(0); return 0.0; }
     const double us = (end - start) * MEGA / static_cast<double>(dummy_.QuadPart); // micro second
     return  us * GetUnitFactor();
 }
@@ -75,18 +70,13 @@ double PerfChecker::GetUnitFactor()
 {
     switch (timeunit_)
     {
-    case PerfChecker::Second: return  1.0e-6;
-    case PerfChecker::MilliSecond: return  1.0e-3;
+    case PerfChecker::Second:      return 1.0e-6;
+    case PerfChecker::MilliSecond: return 1.0e-3;
     case PerfChecker::MicroSecond: return 1.0;
     default: assert(0); break;
     }
 
     return 0.0;
-}
-
-void PerfChecker::Initialize()
-{
-    check_.clear();
 }
 
 bool PerfChecker::CheckValidity()
